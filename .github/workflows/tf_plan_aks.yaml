@@ -1,6 +1,6 @@
 name: "Deploy AKS cluster with Terraform"
 on:
-  workflow_dispatch
+  workflow_dispatch:
   #push:
     #branches:
       #- main
@@ -44,7 +44,7 @@ jobs:
         if: success() || failure()
         run: terraform validate -no-color
       
-      -- name: Terraform Plan
+      - name: Terraform Plan
         id: plan
         run: terraform plan
           
