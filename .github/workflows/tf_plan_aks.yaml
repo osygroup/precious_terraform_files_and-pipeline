@@ -1,0 +1,51 @@
+name: "Deploy AKS cluster with Terraform"
+on:
+  workflow_dispatch:
+  #push:
+    #branches:
+      #- main
+env:
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  RESOURCE_GROUP: ${{ secrets.TFSTATE_RESOURCE_GROUP }}
+  STORAGE_ACCOUNT: ${{ secrets.TFSTATE_STORAGE_ACCOUNT }}
+  CONTAINER_NAME: ${{ secrets.TFSTATE_CONTAINER_NAME }}
+jobs:
+  Deploy_AKS:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform_aks
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 3.0
+          
+      - name: Terraform Init
+        id: init
+        run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
+        
+         # Run a terraform fmt to check syntax
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+        # Run a terraform validate
+      - name: Terraform Validate
+        id: validate
+        # Run even if formatting fails
+        if: success() || failure()
+        run: terraform validate -no-color
+      
+      -- name: Terraform Plan
+        id: plan
+        run: terraform plan
+          
+
