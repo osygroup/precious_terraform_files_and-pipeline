@@ -1,4 +1,4 @@
-name: "Terraform Plan for AKS cluster"
+name: "Destroy Terraform-created AKS cluster"
 on:
   workflow_dispatch:
   #push:
@@ -13,7 +13,7 @@ env:
   STORAGE_ACCOUNT: ${{ secrets.TFSTATE_STORAGE_ACCOUNT }}
   CONTAINER_NAME: ${{ secrets.TFSTATE_CONTAINER_NAME }}
 jobs:
-  terraform_plan:
+  terraform_destroy:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -22,7 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
+      
+      # Install Terraform on runner
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -31,14 +32,9 @@ jobs:
       - name: Terraform Init
         #id: init
         run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
-
-        # Run a terraform validate
-      - name: Terraform Validate
-        #id: validate
-        run: terraform validate -no-color
       
-      - name: Terraform Plan
-        #id: plan
-        run: terraform plan
+      - name: Terraform Destroy
+        #id: destroy
+        run: terraform destroy -auto-approve
           
 
