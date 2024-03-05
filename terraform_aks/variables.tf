@@ -3,6 +3,7 @@ terraform {
 # Terraform strongly recommend using the required_providers block to set the
 # Azure Provider source and version being used
 # I don't usually set this in the past, so that the latest version of Azure Provider is set automatically
+# I commented the required_providers block because this prevented tcreation of the AKS cluster in West Europe 
 
   #required_providers {
     #azurerm = {
