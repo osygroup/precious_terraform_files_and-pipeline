@@ -29,8 +29,8 @@ jobs:
         with:
           terraform_version: 1.7.4
           
-      #- name: Terraform Init
-        #run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
+      - name: Terraform Init
+        run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
       
       - name: Terraform Apply
         run: terraform apply -auto-approve
