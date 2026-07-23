@@ -9,7 +9,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   sku_tier = "Standard"
 
   default_node_pool {
-    name       = "${data.azurerm_resource_group.rg.name}-aks-system"
+    name       = "system"
     node_count = 1
     vm_size    = "Standard_D2ads_v7"
     os_disk_size_gb = 128
