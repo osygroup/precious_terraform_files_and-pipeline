@@ -1,6 +1,9 @@
 name: "Commsworth Terraform Plan for AKS cluster (Build Validation)"
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   pull_request:
     types: [opened, synchronize, reopened] 
     branches:
