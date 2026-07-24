@@ -1,7 +1,7 @@
 resource "azurerm_kubernetes_cluster" "aks" {
   name                     = "${data.azurerm_resource_group.rg.name}-aks"
   resource_group_name      = data.azurerm_resource_group.rg.name
-  location                 = data.azurerm_resource_group.rg.location
+  location                 = var.location
   dns_prefix               = "uataks"
 
   kubernetes_version       = var.kubernetes_version

@@ -1,6 +1,6 @@
-#variable "location" {
-#  default = "West Europe"
-#}
+variable "location" {
+  default = "West Europe"
+}
 
 #variable "resource_group_name" {
 #  default = "FinSaas-UAT"
