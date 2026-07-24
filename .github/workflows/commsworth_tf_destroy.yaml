@@ -1,4 +1,4 @@
-name: "Destroy Terraform-created AKS cluster"
+name: "Commsworth Terraform Destroy for AKS cluster"
 on:
   workflow_dispatch:
   #push:

@@ -1,4 +1,4 @@
-name: "Deploy AKS cluster with Terraform"
+name: "Commsworth Terraform Apply for AKS cluster"
 on:
   workflow_dispatch:
   push:
