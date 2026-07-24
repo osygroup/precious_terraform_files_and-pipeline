@@ -18,6 +18,7 @@ env:
   CONTAINER_NAME: ${{ secrets.TFSTATE_CONTAINER_NAME }}
 jobs:
   terraform_plan:
+    name: commsworth-terraform-build-validation
     runs-on: ubuntu-latest
     defaults:
       run:
