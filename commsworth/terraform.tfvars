@@ -1,4 +1,4 @@
-#location = "West Europe"
+location = "West Europe"
 
 #resource_group_name = "FinSaas-UAT"
 
