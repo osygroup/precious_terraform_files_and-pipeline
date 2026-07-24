@@ -4,6 +4,7 @@ on:
     inputs:
       environment:
         description: 'Approve Terraform Destroy'
+        type: environment
         required: true
         default: 'approvers'
   #push:
@@ -17,10 +18,12 @@ env:
   RESOURCE_GROUP: ${{ secrets.TFSTATE_RESOURCE_GROUP }}
   STORAGE_ACCOUNT: ${{ secrets.TFSTATE_STORAGE_ACCOUNT }}
   CONTAINER_NAME: ${{ secrets.TFSTATE_CONTAINER_NAME }}
+
 jobs:
   terraform_destroy:
     name: commsworth-terraform-destroy
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     defaults:
       run:
         working-directory: ./commsworth
