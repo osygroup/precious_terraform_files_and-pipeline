@@ -1,6 +1,11 @@
 name: "Commsworth Terraform Destroy for AKS cluster"
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Approve Terraform Destroy'
+        required: true
+        default: 'approvers'
   #push:
     #branches:
       #- main
